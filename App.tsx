@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import {
   StyleSheet,
   Text,
@@ -50,33 +50,59 @@ const productData = [
 ];
 
 const safetyData = [
-  {name: 'Safe', logo: 'face-mask', iconType: ICON_TYPE.MaterialCommunityIcons},
+  {
+    name: 'Safe',
+    logo: 'face-mask',
+    iconType: ICON_TYPE.MaterialCommunityIcons,
+    message:
+      'Our service partners are verified through at least three trusted references, including Aadhaar and license verification, and have a minimum of 5 years of experience, ensuring utrnost safety',
+  },
   {
     name: 'Trained',
     logo: 'security',
     iconType: ICON_TYPE.MaterialCommunityIcons,
+    message: 'We ensure briefing of partner before onboarding-',
   },
   {
     name: 'Experienced',
     logo: 'precision-manufacturing',
     iconType: ICON_TYPE.MaterialIcons,
+    message:
+      'Our partners are 5+ Years of experience. We assign a partner who is having relevant service experience as per the Customer requirement.',
   },
   {
     name: 'Punctual',
     logo: 'calendar-clock',
     iconType: ICON_TYPE.MaterialCommunityIcons,
+    message:
+      'Our partners are briefed about the importance of time, Also we track thär performance & provide them feedback as & when required.',
   },
   {
     name: '24*7 Services',
     logo: 'phone',
     iconType: ICON_TYPE.MaterialCommunityIcons,
+    message:
+      'Services available 24*7, Book your service for any time. Our customer care number is available in between 06:00 AM to 06:00 PM -9999160322 PM (Monday To Saturday)',
   },
-  {name: 'Presence', logo: 'location-on', iconType: ICON_TYPE.MaterialIcons},
-  {name: 'Convenient', logo: 'hand-point-up', iconType: ICON_TYPE.FontAwesome5},
+  {
+    name: 'Presence',
+    logo: 'location-on',
+    iconType: ICON_TYPE.MaterialIcons,
+    message:
+      'We are presently available in Dehi, Uttar Pradesh, Haryana, Punjab, Kamataka, Maharashtra, Gl#at, Rajasthan, Telangana, Tamil Nadu,West Bengal. Our Head office is at Offce No G-39, Varcfirnan Grand Market, Sector 3, Dwarka, New Dehi- 110078',
+  },
+  {
+    name: 'Convenient',
+    logo: 'hand-point-up',
+    iconType: ICON_TYPE.FontAwesome5,
+    message: `Cancellation, Reschedule, Instant Refunds, Download Invoice, Multiple Payment Mode's, Customer Support`,
+  },
   {
     name: 'How It Works',
     logo: 'settings-suggest',
     iconType: ICON_TYPE.MaterialIcons,
+    message:
+      'Book > Confirmation > Partner Assignment > Partner Accept > Partner On the Way > Partner Reach > TrW Start through OTP > Trip End >Biling > Payment > Rate Your Experience > Download Invoice',
   },
 ];
 
@@ -87,6 +113,7 @@ const white = 'white';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState(tabData[0]);
+  const [message, setMessage] = useState(safetyData[0]?.message);
 
   const renderList = ({item}) => (
     <TouchableOpacity style={styles.productItem}>
@@ -101,8 +128,10 @@ export default function App() {
   );
 
   const renderSafetyList = ({item}) => (
-    <View style={[styles.productItem, {width: '20%'}]}>
-      <TouchableOpacity style={styles.iconContainer}>
+    <View style={[styles.productItem, {width: '25%', marginVertical:10,}]}>
+      <TouchableOpacity
+        onPress={() => setMessage(item.message)}
+        style={styles.iconContainer}>
         <IconSelector
           type={item.iconType}
           name={item.logo}
@@ -110,7 +139,7 @@ export default function App() {
           color={mainColor}
         />
       </TouchableOpacity>
-      <Text style={{color: white, marginTop: 2}}>{item.name}</Text>
+      <Text style={{color: white, marginTop: 2, fontSize:12}}>{item.name}</Text>
     </View>
   );
 
@@ -118,25 +147,23 @@ export default function App() {
     return (
       <View style={styles.containersafety}>
         <View style={styles.infoBox}>
-          <Text style={styles.mainText}>
-            Our drivers are briefed about the importance of time, Also we track
-            their performance & provide them feedback as & when required.
-          </Text>
+          <Text style={styles.mainText}>{message}</Text>
           <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
             <Text style={styles.subText}>Your Safety Matters</Text>
             <Text style={styles.phoneNumber}>9999160322</Text>
           </View>
-          <View style={{backgroundColor: mainColor, flex: 1}}>
-            {safetyData.length !== 0 && (
-              <FlatList
-                data={safetyData}
-                numColumns={4}
-                columnWrapperStyle={styles.columnWrapper}
-                keyExtractor={item => item.name}
-                renderItem={renderSafetyList}
-              />
-            )}
-          </View>
+        </View>
+
+        <View style={{backgroundColor: mainColor, flex: 1, borderWidth:1, borderColor:white, top:-10}}>
+          {safetyData.length !== 0 && (
+            <FlatList
+              data={safetyData}
+              numColumns={4}
+              columnWrapperStyle={styles.columnWrapper}
+              keyExtractor={item => item.name}
+              renderItem={renderSafetyList}
+            />
+          )}
         </View>
       </View>
     );

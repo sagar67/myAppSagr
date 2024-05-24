@@ -131,13 +131,15 @@ export const styles = StyleSheet.create({
   },
   containersafety: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    // justifyContent: 'center',
+    // alignItems: 'center',
     margin: 16.5,
   },
   infoBox: {
     backgroundColor: white,
     padding: 16,
+    width:'100%',
+    height:150,
     borderRadius: 8,
   },
   mainText: {
