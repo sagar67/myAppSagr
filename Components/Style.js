@@ -80,7 +80,6 @@ export const styles = StyleSheet.create({
   columnWrapper: {
     justifyContent: 'space-between',
     alignItems: 'center',
-    margin: 10,
   },
   productItem: {
     justifyContent: 'space-between',
@@ -138,8 +137,8 @@ export const styles = StyleSheet.create({
   infoBox: {
     backgroundColor: white,
     padding: 16,
-    width:'100%',
-    height:150,
+    width: '100%',
+    height: 150,
     borderRadius: 8,
   },
   mainText: {
@@ -241,5 +240,65 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     color: '#8f8f8f',
     fontStyle: 'italic',
+  },
+  containerbottom: {
+    flex: 1,
+    padding: 16,
+    backgroundColor: mainColor,
+    flexDirection: 'row',
+  },
+  buttonsContainer: {
+    flexDirection: 'column',
+    marginRight: 20,
+    flex: 0.5,
+  },
+  button: {
+    backgroundColor: 'white',
+    padding: 12,
+    borderRadius: 8,
+    marginBottom: 16,
+    alignItems: 'center',
+  },
+  buttonText1: {
+    color: white,
+    margin: 4,
+    fontSize: 12,
+  },
+  socialIconsContainer: {
+    justifyContent: 'space-between',
+    marginBottom: 16,
+  },
+  socialIcon: {
+    width: 30,
+    height: 30,
+  },
+  applyButton: {
+    backgroundColor: '#fd8900',
+    paddingVertical: 5,
+    borderRadius: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '30%',
+  },
+  applyButtonText: {
+    fontSize: 12,
+    color: white,
+    fontWeight: 'bold',
+  },
+  contactInfoContainer: {
+    marginVertical: 4,
+    padding: 10,
+    backgroundColor: white,
+    borderRadius: 10,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  contactText: {
+    color: 'white', // Set your desired text color
+    marginBottom: 8,
+  },
+  addressText: {
+    color: 'white', // Set your desired text color
   },
 });

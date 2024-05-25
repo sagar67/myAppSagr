@@ -106,6 +106,24 @@ const safetyData = [
   },
 ];
 
+const bottomTabs = [
+  {
+    name: 'Refer',
+    logo: 'account-multiple-outline',
+    iconType: ICON_TYPE.MaterialCommunityIcons,
+  },
+  {
+    name: 'Reviews',
+    logo: 'reviews',
+    iconType: ICON_TYPE.MaterialIcons,
+  },
+  {
+    name: 'Track',
+    logo: 'package-variant',
+    iconType: ICON_TYPE.MaterialCommunityIcons,
+  },
+];
+
 const mainColor = '#16588E';
 const secondaryColor = '#ff8b00';
 const black = 'black';
@@ -128,7 +146,7 @@ export default function App() {
   );
 
   const renderSafetyList = ({item}) => (
-    <View style={[styles.productItem, {width: '25%', marginVertical:10,}]}>
+    <View style={[styles.productItem, {width: '25%', marginVertical: 10}]}>
       <TouchableOpacity
         onPress={() => setMessage(item.message)}
         style={styles.iconContainer}>
@@ -139,8 +157,22 @@ export default function App() {
           color={mainColor}
         />
       </TouchableOpacity>
-      <Text style={{color: white, marginTop: 2, fontSize:12}}>{item.name}</Text>
+      <Text style={{color: white, marginTop: 2, fontSize: 12}}>
+        {item.name}
+      </Text>
     </View>
+  );
+
+  const bottomTabsRender = ({item}) => (
+    <TouchableOpacity style={[styles.productItem, {padding: 0}]}>
+      <IconSelector
+        type={item.iconType}
+        name={item.logo}
+        size={30}
+        color={black}
+      />
+      <Text style={{color: black}}>{item.name}</Text>
+    </TouchableOpacity>
   );
 
   const renderSafety = () => {
@@ -154,7 +186,14 @@ export default function App() {
           </View>
         </View>
 
-        <View style={{backgroundColor: mainColor, flex: 1, borderWidth:1, borderColor:white, top:-10}}>
+        <View
+          style={{
+            backgroundColor: mainColor,
+            flex: 1,
+            borderWidth: 1,
+            borderColor: white,
+            top: -10,
+          }}>
           {safetyData.length !== 0 && (
             <FlatList
               data={safetyData}
@@ -297,12 +336,154 @@ export default function App() {
     );
   };
 
+  const renderBottomTabs = () => {
+    return (
+      <View
+        style={{
+          position: 'absolute',
+          bottom: 0.1,
+          flex: 1,
+          width: '100%',
+        }}>
+        <View
+          style={{
+            flexDirection: 'row',
+            backgroundColor: white,
+            padding: 20,
+            justifyContent: 'space-between',
+          }}>
+          {bottomTabs.length !== 0 && (
+            <FlatList
+              // keyExtractor={(item) => item.name}
+              data={bottomTabs}
+              numColumns={3}
+              columnWrapperStyle={styles.columnWrapper}
+              // keyExtractor={item => item.name}
+              renderItem={bottomTabsRender}
+            />
+          )}
+        </View>
+      </View>
+    );
+  };
+
+  const renderTabs = (name) => {
+    return (
+      <TouchableOpacity style={styles.contactInfoContainer}>
+        <Text style={{color: mainColor, fontSize: 11}}>{name}</Text>
+        <IconSelector
+          type={ICON_TYPE.MaterialIcons}
+          name={'double-arrow'}
+          color={mainColor}
+          size={15}
+        />
+      </TouchableOpacity>
+    );
+  }
+  
+
+  const renderContacts = () => {
+    return (
+      <View style={{marginBottom: '30%'}}>
+        <View style={styles.containerbottom}>
+          {/* Buttons */}
+          <View style={styles.buttonsContainer}>
+            <View>
+              <Text style={[styles.buttonText1, {fontWeight: 'bold'}]}>
+                Contact Us
+              </Text>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <IconSelector
+                  type={ICON_TYPE.MaterialCommunityIcons}
+                  name={'email'}
+                  color={white}
+                  size={15}
+                />
+                <Text style={styles.buttonText1}>Support@tatd.in</Text>
+              </View>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <IconSelector
+                  type={ICON_TYPE.MaterialCommunityIcons}
+                  name={'phone'}
+                  color={white}
+                  size={15}
+                />
+                <Text style={styles.buttonText1}>+91 9999160322</Text>
+              </View>
+              <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                <IconSelector
+                  type={ICON_TYPE.MaterialCommunityIcons}
+                  name={'office-building-outline'}
+                  color={white}
+                  size={15}
+                />
+                <Text style={styles.buttonText1}>
+                  Office No G-39, Vardhman Grand Market, Sector 3, Dwarka, New
+                  Delhi- 110078 Execution Force Private Limited
+                </Text>
+              </View>
+            </View>
+
+            <View style={styles.socialIconsContainer}>
+              <Text style={styles.buttonText1}>Follow Us</Text>
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  justifyContent: 'space-evenly',
+                  margin: 10,
+                }}>
+                <IconSelector
+                  type={ICON_TYPE.MaterialCommunityIcons}
+                  name={'facebook'}
+                  color={white}
+                  size={30}
+                />
+                <IconSelector
+                  type={ICON_TYPE.MaterialCommunityIcons}
+                  name={'instagram'}
+                  color={'#d52d7b'}
+                  size={30}
+                />
+                <IconSelector
+                  type={ICON_TYPE.MaterialCommunityIcons}
+                  name={'linkedin'}
+                  color={'#0a73a2'}
+                  size={30}
+                />
+              </View>
+            </View>
+          </View>
+          <View style={{flex: 0.5}}>
+            {renderTabs('Make an Enquiry')}
+            {renderTabs('Cancel My Booking')}
+            {renderTabs('My Weekly Schedule')}
+            {renderTabs('Download Invoice')}
+            {renderTabs('My Feedback')}
+            {renderTabs('About Us')}
+          </View>
+        </View>
+        <View style={{justifyContent: 'center', alignItems: 'center'}}>
+          <TouchableOpacity style={styles.applyButton}>
+            <Text style={styles.applyButtonText}>Apply for Driver Job</Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView>
         <ScrollView>
           <View style={styles.navBar}>
-            <Text style={styles.logo}>tatd</Text>
+            <Image
+              source={require('./Components/assets/logo.jpg')}
+              style={{
+                height: 80,
+                width: 150,
+              }}
+            />
             <View style={styles.segmentControl}>
               {tabData.map(item => (
                 <TouchableOpacity
@@ -387,7 +568,9 @@ export default function App() {
           {renderRatings()}
           {renderComingSoon()}
           {renderReviews()}
+          {renderContacts()}
         </ScrollView>
+        {renderBottomTabs()}
       </KeyboardAvoidingView>
     </SafeAreaView>
   );
